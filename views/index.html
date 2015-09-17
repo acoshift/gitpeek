@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>GitPeek</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://fb.me/react-0.13.3.min.js"></script>
+		<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+		<style>
+			body {
+				margin-top: 30px;
+				font-size: 18px;
+			}
+			.ok-button {
+				width: 200px;
+			}
+			.container-f {
+				max-width: 900px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			#user-avatar {
+				text-align: center;
+			}
+			#user-name {
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/jsx">
+			var GitPeek = React.createClass({
+				getInitialState: function() {
+					return {
+						user: '',
+						name: '',
+						avatar: '',
+						bio: '',
+						followers: [],
+						repos: []
+					};
+				},
+				handleChange: function(e) {
+					this.setState({user: e.target.value});
+				},
+				handleSubmit: function (e) {
+					$.getJSON('data/' + this.state.user, this.handleCallback);
+					return false;
+				},
+				handleCallback: function (e) {
+					this.setState({
+						name: e.name,
+						avatar: e.avatar,
+						bio: e.bio,
+						followers: e.followers,
+						repos: e.repos
+					});
+				},
+				render: function () {
+					var user = this.state.user;
+					var name = this.state.name;
+					var avatar = this.state.avatar;
+					var bio = this.state.bio;
+					var followers = this.state.followers;
+					var repos = this.state.repos;
+
+					var detail = <div></div>;
+					if (name != '') {
+						detail = (
+							<div className="row">
+								<br/>
+								<div className="col-md-3" id="user-avatar">
+									<img width="160" src={avatar} />
+								</div>
+								<div className="col-md-9">
+									<div id="user-name">{name}</div>
+									Bio:
+									<div id="user-bio">{bio}</div>
+									<br />
+									<div className="row">
+										<div className="col-md-6" id="user-foll">
+											Followers:
+											{followers.map(function (follower) {
+												return <div>{follower}</div>;
+											})}
+										</div>
+										<div className="col-md-6" id="user-repo">
+											Repositories:
+											{repos.map(function (repo) {
+												return <div><a href={repo.url}>{repo.name}</a></div>;
+											})}
+										</div>
+									</div>
+								</div>
+							</div>
+						);
+					}
+					return (
+					    <div className="container container-f">
+						    <form onSubmit={this.handleSubmit}>
+								<div className="row-fluid">
+									<div className="form-group">
+										<div className="input-group">
+											<input type="text" className="form-control" value={user}
+												placeholder="Input github username" onChange={this.handleChange} onKey />
+											<span className="input-group-btn" id="ok-button">
+												<input type="submit" className="btn btn-default go ok-button" value="OK" />
+											</span>
+										</div>
+									</div>
+								</div>
+							</form>
+							{detail}
+						</div>
+			        );
+				}
+			});
+
+			React.render(<GitPeek/>, document.body);
+		</script>
+	</body>
+</html>
