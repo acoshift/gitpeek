@@ -3,11 +3,11 @@
 ---
 
 ## How to use!
-1. Install Node modules
+* Install Node modules
 ```
 $ npm install
 ```
-2. Run the server :D
+* Run the server :D
 ```
 $ node server.js
 ```
