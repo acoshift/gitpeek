@@ -4,7 +4,6 @@
 
 ## How to use!
 1. Install Node modules
-
 ```
 $ npm install
 ```

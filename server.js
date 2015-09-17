@@ -20,7 +20,7 @@ app.get('/data/:user', function (req, res) {
 		ghuser.followers(function (err, body, header) {
 			obj.followers = [];
 			body.forEach(function (element, index, array) {
-				obj.followers.push(element.login);
+				obj.followers.push({'name': element.login, 'url': element.html_url});
 			});
 
 			ghuser.repos(function (err, body, header) {

@@ -8,17 +8,41 @@
 		<script src="https://fb.me/react-0.13.3.min.js"></script>
 		<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
 		<style>
+			html {
+				height: 100%;
+			}
 			body {
 				margin-top: 30px;
 				font-size: 18px;
+				background: -webkit-linear-gradient(top,
+					rgba(1, 1, 1, 0.3) 0%, rgba(1, 1, 1, 0) 10%, rgba(1, 1, 1, 0) 90%, rgba(1, 1, 1, 0.3) 100%);
+				background: -o-linear-gradient(top,
+                    rgba(1, 1, 1, 0.3) 0%, rgba(1, 1, 1, 0) 10%, rgba(1, 1, 1, 0) 90%, rgba(1, 1, 1, 0.3) 100%);
+				background: -moz-linear-gradient(top,
+                    rgba(1, 1, 1, 0.3) 0%, rgba(1, 1, 1, 0) 10%, rgba(1, 1, 1, 0) 90%, rgba(1, 1, 1, 0.3) 100%);
+				background: linear-gradient(top,
+                    rgba(1, 1, 1, 0.3) 0%, rgba(1, 1, 1, 0) 10%, rgba(1, 1, 1, 0) 90%, rgba(1, 1, 1, 0.3) 100%);
 			}
-			.ok-button {
-				width: 200px;
+			.well {
+				background: #fff;
+				-webkit-box-shadow: 0 3px 10px #777;
+				-moz-box-shadow: 0 3px 10px #777;
+				box-shadow: 0 3px 10px #777;
+			}
+			#ok-button {
+				width: 180px;
+				background: #999;
+				color: #fff;
+				border-radius: 5px;
+				margin-left: 40px;
 			}
 			.container-f {
 				max-width: 900px;
 				margin-left: auto;
 				margin-right: auto;
+			}
+			#detail {
+				margin-top: 100px;
 			}
 			#user-avatar {
 				text-align: center;
@@ -68,7 +92,7 @@
 					var detail = <div></div>;
 					if (name != '') {
 						detail = (
-							<div className="row">
+							<div className="row well" id="detail">
 								<br/>
 								<div className="col-md-3" id="user-avatar">
 									<img width="160" src={avatar} />
@@ -82,7 +106,7 @@
 										<div className="col-md-6" id="user-foll">
 											Followers:
 											{followers.map(function (follower) {
-												return <div>{follower}</div>;
+												return <div><a href={follower.url}>{follower.name}</a></div>;
 											})}
 										</div>
 										<div className="col-md-6" id="user-repo">
@@ -98,17 +122,15 @@
 					}
 					return (
 					    <div className="container container-f">
-						    <form onSubmit={this.handleSubmit}>
-								<div className="row-fluid">
-									<div className="form-group">
-										<div className="input-group">
-											<input type="text" className="form-control" value={user}
-												placeholder="Input github username" onChange={this.handleChange} onKey />
-											<span className="input-group-btn" id="ok-button">
-												<input type="submit" className="btn btn-default go ok-button" value="OK" />
-											</span>
-										</div>
-									</div>
+						    <form className="form-horizontal" onSubmit={this.handleSubmit}>
+								<div className="form-group col-xs-9">
+									<input type="text" className="form-control input-lg" value={user}
+										placeholder="Input github username" onChange={this.handleChange} onKey />
+								</div>
+								<div className="col-xs-2">
+									<span className="input-group-btn">
+										<input type="submit" className="btn btn-default btn-lg" id="ok-button" value="OK" />
+									</span>
 								</div>
 							</form>
 							{detail}
