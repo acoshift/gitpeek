@@ -9,6 +9,6 @@ $ npm install
 ```
 * Run the server :D
 ```
-$ node server.js
+$ npm start
 ```
 Server will run at http://localhost:8888

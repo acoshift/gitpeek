@@ -4,15 +4,26 @@
   "description": "Peek git user info :D",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/acoshift/gitpeek"
+    "url": "git+https://github.com/acoshift/gitpeek.git"
   },
   "author": "Thanatat Tamtan",
   "license": "ISC",
   "devDependencies": {
+    "react": "^0.13.3"
+  },
+  "bugs": {
+    "url": "https://github.com/acoshift/gitpeek/issues"
+  },
+  "homepage": "https://github.com/acoshift/gitpeek#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "octonode": "^0.7.1",
+    "node-jsx": "^0.13.3",
     "react": "^0.13.3"
   }
 }
