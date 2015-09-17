@@ -13,7 +13,6 @@ app.get('/data/:user', function (req, res) {
 
 	ghuser.info(function (err, body, header) {
 		var obj = {};
-		console.log(body);
 		obj.name = body.name;
 		obj.avatar = body.avatar_url;
 		obj.bio = body.bio;
